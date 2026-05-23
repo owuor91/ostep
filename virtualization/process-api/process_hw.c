@@ -137,11 +137,11 @@ void pipe_children(){
     }
 
 
-    close(pipefd[0]);                              //parent closes both ends of the pipe
-    close(pipefd[1]);
+    close(pipefd[0]);                              //parent closes both ends of the pipe because every process that has the write end of the pipe
+    close(pipefd[1]);                              //open must close it else the reading child 2 will hang. Parent created the pipe and has both ends
 
     waitpid(rc1, NULL,0);                          
-    waitpid(rc2, NULL,0);                          //waits for each child by its pid
+    waitpid(rc2, NULL,0);                          //waits for each child by its pid 
     printf("Back to parent, pid: %d\n", getpid());    
 }
 
